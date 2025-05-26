@@ -87,7 +87,7 @@ def main():
 
     if not os.path.exists("export"):
         os.makedirs("export")
-    plt.savefig("export/wordclouds.png", dpi=300, bbox_inches="tight")
+    plt.savefig("export/wordcloud.png", dpi=300, bbox_inches="tight")
 
 
 if __name__ == "__main__":
