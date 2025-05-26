@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN python3 -m venv /venv
 
-RUN /venv/bin/python3 -m pip install gensim wordcloud
+RUN /venv/bin/python3 -m pip install \
+    matplotlib numpy pandas \
+    gensim wordcloud
 
 ENV PATH="/venv/bin:$PATH"
 ENV VIRTUAL_ENV="/venv"
