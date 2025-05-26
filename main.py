@@ -38,13 +38,14 @@ def extract_words_of_repo(url: str) -> list[str]:
         if content:
             parts = split_identifier(content)
             corpus.extend(parts)
+    remove_directory(clone_path)
     return corpus
 
 
 def main():
     urls = [
         "https://github.com/Oya-Tomo/alpha-rebrew-py",
-        # "https://github.com/Oya-Tomo/lunar-lander-ppo-pt",
+        "https://github.com/Oya-Tomo/lunar-lander-ppo-pt",
         # "https://github.com/Oya-Tomo/paper-crawler",
         # "https://github.com/Oya-Tomo/paper-summarizer",
         # "https://github.com/Oya-Tomo/wavier-keys",
@@ -90,21 +91,43 @@ def main():
     documents = []
     for url in urls:
         words = extract_words_of_repo(url)
+        print(f"Extracted {len(words)} words from {url}")
         documents.append(words)
 
     dictionary = Dictionary(documents)
+    print("docs num:", dictionary.num_docs)
+    print("dfs", len(dictionary.dfs))
 
     corpus = [*map(lambda x: dictionary.doc2bow(x), documents)]
-    tf_idf_model = TfidfModel(corpus)
-    corpus_tfidf = tf_idf_model[corpus]  # 計算されたTF-IDF
+    tfidf_model = TfidfModel(corpus)
+    corpus_tfidf = tfidf_model[corpus]
 
-    tf_idf_value = [
-        pd.DataFrame(corpus_tfidf[i], columns=["id", "tfidf"])
-        for i in range(len(corpus_tfidf))
-    ]
-    for tfidf in tf_idf_value:
-        tfidf["name"] = tfidf["id"].map(lambda x: dictionary[x])
+    tfidf_max = {}
+    for tfidf in corpus_tfidf:
+        for word_id, score in tfidf:
+            word = dictionary[word_id]
+            if word not in tfidf_max or score > tfidf_max[word]:
+                tfidf_max[word] = score
+    print(tfidf_max)
+
+    font_path = "/home/oyatomo/.local/share/fonts/FiraCodeNerdFont-Regular.ttf"
+    max_words = 50
+
+    x = dict(tfidf_max.items())  # 文書の{単語:TF-IDF}の辞書
+    im = WordCloud(
+        font_path=font_path,
+        width=600,
+        height=400,
+        prefer_horizontal=1,
+        background_color="white",
+        colormap="viridis",
+        max_words=max_words,
+        random_state=0,
+    ).generate_from_frequencies(x)
+    plt.axis("off")
+    plt.imshow(im, interpolation="bilinear")
+    plt.savefig("export/wordclouds.png", dpi=300, bbox_inches="tight")
 
 
 if __name__ == "__main__":
-    print(extract_words_of_repo("https://github.com/Oya-Tomo/paper-crawler"))
+    main()
