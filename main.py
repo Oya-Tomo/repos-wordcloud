@@ -111,9 +111,9 @@ def main():
     print(tfidf_max)
 
     font_path = "/home/oyatomo/.local/share/fonts/FiraCodeNerdFont-Regular.ttf"
-    max_words = 50
+    max_words = 200
 
-    x = dict(tfidf_max.items())  # 文書の{単語:TF-IDF}の辞書
+    x = dict(tfidf_max.items())
     im = WordCloud(
         font_path=font_path,
         width=600,
