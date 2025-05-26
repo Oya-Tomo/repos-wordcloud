@@ -1,0 +1,6 @@
+services:
+  generator:
+    container_name: repos-wordcloud-generator
+    build: .
+    volumes:
+      - ./:/workspace
