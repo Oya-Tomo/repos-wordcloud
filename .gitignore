@@ -3,5 +3,6 @@ lib/
 
 repo/
 export/
+font/
 
-repos.json
+config.json
