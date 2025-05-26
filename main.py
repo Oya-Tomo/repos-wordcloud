@@ -43,8 +43,11 @@ def extract_words_of_repo(url: str) -> list[str]:
 
 
 def main():
-    with open("repos.json", "r") as f:
-        urls = json.loads(f.read())["repos"]
+    with open("config.json", "r") as f:
+        config = json.load(f.read())
+
+    font = config["font"]
+    urls = config["urls"]
 
     documents = []
     for url in urls:
@@ -68,18 +71,15 @@ def main():
                 tfidf_max[word] = score
     print(tfidf_max)
 
-    font_path = "/home/oyatomo/.local/share/fonts/FiraCodeNerdFont-Regular.ttf"
-    max_words = 200
-
     x = dict(tfidf_max.items())
     im = WordCloud(
-        font_path=font_path,
+        font_path=font,
         width=600,
         height=400,
         prefer_horizontal=1,
         background_color="white",
         colormap="viridis",
-        max_words=max_words,
+        max_words=200,
         random_state=0,
     ).generate_from_frequencies(x)
     plt.axis("off")
