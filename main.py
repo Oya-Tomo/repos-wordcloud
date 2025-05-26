@@ -44,10 +44,15 @@ def extract_words_of_repo(url: str) -> list[str]:
 
 def main():
     with open("config.json", "r") as f:
-        config = json.load(f.read())
+        config = json.loads(f.read())
 
     font = config["font"]
     urls = config["repos"]
+
+    width = config["size"]["width"]
+    height = config["size"]["height"]
+
+    max_words = config["max_words"]
 
     documents = []
     for url in urls:
@@ -74,12 +79,12 @@ def main():
     x = dict(tfidf_max.items())
     im = WordCloud(
         font_path=font,
-        width=600,
-        height=400,
+        width=width,
+        height=height,
         prefer_horizontal=1,
         background_color="white",
         colormap="viridis",
-        max_words=200,
+        max_words=max_words,
         random_state=0,
     ).generate_from_frequencies(x)
     plt.axis("off")

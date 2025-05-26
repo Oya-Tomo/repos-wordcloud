@@ -20,6 +20,11 @@ Scrape your repositories and generate a word cloud picture from your programs.
 ```json
 {
   "font": "font/[putted-font].ttf",
+  "size": {
+    "width": 800,
+    "height": 600
+  },
+  "max_words": 200,
   "repos": [
     "https://github.com/Oya-Tomo/repos-wordcloud",
     "https://github.com/..."
