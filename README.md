@@ -32,6 +32,11 @@ Scrape your repositories and generate a word cloud picture from your programs.
 }
 ```
 
+- `font`: relative font file path
+- `size`: wordcloud image size
+- `max_words`: max number of words in picture
+- `repos`: repository url list
+
 ### run docker container
 
 ```shell
