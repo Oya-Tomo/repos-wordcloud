@@ -47,7 +47,7 @@ def main():
         config = json.load(f.read())
 
     font = config["font"]
-    urls = config["urls"]
+    urls = config["repos"]
 
     documents = []
     for url in urls:
