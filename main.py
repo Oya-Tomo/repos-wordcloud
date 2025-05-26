@@ -1,3 +1,4 @@
+import os
 import re
 import json
 
@@ -83,6 +84,9 @@ def main():
     ).generate_from_frequencies(x)
     plt.axis("off")
     plt.imshow(im, interpolation="bilinear")
+
+    if not os.path.exists("export"):
+        os.makedirs("export")
     plt.savefig("export/wordclouds.png", dpi=300, bbox_inches="tight")
 
 
