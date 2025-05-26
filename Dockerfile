@@ -3,14 +3,8 @@ FROM ubuntu:24.04
 WORKDIR /workspace
 
 RUN apt-get update && apt-get install -y \
-    python3.12 python3.12-pip python3.12-venv \
-    build-essential gcc g++ cmake gfortran pkg-config \
-    libopenblas-dev liblapack-dev \
-    software-properties-common \
-    libbz2-dev libdb-dev \
-    libreadline-dev libffi-dev libgdbm-dev liblzma-dev \
-    libncursesw5-dev libsqlite3-dev libssl-dev \
-    zlib1g-dev uuid-dev
+    python3 python3-pip python3-venv \
+    libopenblas-dev git
 
 RUN python3 -m venv /venv
 
