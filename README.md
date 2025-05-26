@@ -12,7 +12,8 @@ Scrape your repositories and generate a word cloud picture from your programs.
 
 ### put font file
 
-put a `ttf` file in `font` directory.
+- Create `font` directory.
+- Put a `ttf` file in `font` directory.
 
 ### make config.json
 
@@ -34,4 +35,4 @@ docker compose up
 
 ### get picture
 
-Generated picture will be in `export` directory.
+- Generated picture will be in `export` directory.
