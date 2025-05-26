@@ -53,7 +53,7 @@ def get_file_content(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    repo_url = "https://github.com/Oya-Tomo/paper-crawler"
+    repo_url = "https://github.com/Oya-Tomo/repos-wordcloud"
     destination_path = "repo"
 
     if os.path.exists(destination_path):
